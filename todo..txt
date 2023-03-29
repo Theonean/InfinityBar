@@ -1,0 +1,42 @@
+7.3.2023:
+Change bubble movement from DOM-change to css-animation -- DONE
+add different fruit that can fall --> DONE
+add robot that follows movement and can only move in middle segment --> DONE
+
+14.3.2023:
+
+
+Idea to implement:
+Setting of the website is the Inside of a room, pixelstyle 
+the room has various relaxing elements you can play around with:
+in the left part there are 3 effects which you can toggle:
+    -bubble shooter on/off
+    -lavalamp on/off
+    confettishooter on/off
+
+have a robot factory in the middle part, when you click a fruit a robot comes out
+of the factory and collects the fruit and throws it into the top of the factory
+
+
+
+sprites needed:
+waterbubble
+waterbubble-shooter
+roomba - follows mouse on floor
+fruitmachine - shoots fruits into air or drops them into pipe so they vanish, can be cut inbetween
+canvas - can be drawn on by user
+ different office stuff that could be interesting to interact / click or
+
+ new Idea maybe visually more interesting:
+ Website is from the front view of a Bar (inspired by barkeeper flash game)
+ on the bar there is a bubbleshooter (element bubble integrated, jay)
+ and behind the counter a bartender who wobbles around slightly. You can get him to do stuff?
+ 
+ -remove fruit - DONE
+ -set bubbles to upwards and smaller
+ -add bartender whose eyes follow mouse - started that
+ -remake bar in HTML/CSS style with white boxes, clean look -- did it in Pixelart
+
+ -create starting animation for when website is loaded
+ -different elements of bar are animated into position
+
