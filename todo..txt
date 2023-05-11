@@ -57,3 +57,14 @@ loop over it and spawn all of it, either with the satisfying algorithm or the ra
 
 later todo
 generate content outside of current barbounds 
+create different tiles for top and bottom
+"tileset" changes the further away from center you go
+tileset consists of a bunch of options for that level of y-difference, each level is ca. 32 pixels thick
+
+add hitbox option to elements in json 
+for example: hitbox with width and height at position x and y with function call on event
+add system that spawns hitbox and places it next to object
+-bubblespawner hitbox to activate / deactivate it
+-chair to swivel it
+-bottles to break them
+-screen with text that loads up pong when you break it
