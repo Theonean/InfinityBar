@@ -1,19 +1,25 @@
 
+var isPanning = false;
+
 function initialize() {
     //FRUITS
     //setInterval(addfruits, 3000);
 
     //BUBBLES
-    setInterval(addBubble, 400);
+    setInterval(addBubble, 100);
     //setInterval(moveBubbles, 40);
 
+    loadinteractables();
+
+    //global mouse variables
     var mouseX = 0;
     var mouseY = 0;
 
+    //set barkeepers eyes to follow mouse
     var eye1 = document.getElementById("eye1");
     var pupil1 = document.getElementById("pupil1");
 
-    var eye1 = document.getElementById("eye1");
+    var eye2 = document.getElementById("eye2");
     var pupil2 = document.getElementById("pupil2");
 
     document.addEventListener('mousemove', (event) => {
@@ -23,22 +29,9 @@ function initialize() {
         movePupil(mouseX, mouseY, eye2, pupil2);
     });
 
-    
-    const wrapper = document.getElementsByClassName('wrapper')[0];
+    //Move the wrapper when the user leftclicks and drags the canvas
+    const wrapper = document.getElementById('wrapper');
 
-    // Move the wrapper to the left when 'a' is pressed
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'a') {
-        wrapper.style.left = parseInt(wrapper.style.left) - 10 + 'px';
-      }
-    });
-
-    // Move the wrapper to the right when 'd' is pressed
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'd') {
-        wrapper.style.left = parseInt(wrapper.style.left) + 10 + 'px';
-      }
-    });
 
 
 }

@@ -18,7 +18,7 @@ have a robot factory in the middle part, when you click a fruit a robot comes ou
 of the factory and collects the fruit and throws it into the top of the factory
 
 
-
+28.3.2023 (the whole week)
 sprites needed:
 waterbubble
 waterbubble-shooter
@@ -40,3 +40,20 @@ canvas - can be drawn on by user
  -create starting animation for when website is loaded
  -different elements of bar are animated into position
 
+1.4.2023
+create generic barElement class 
+    -on loading it creates a new div 
+    -sets class to input from constructor
+    -set location
+
+I create a new barElement  
+    I set its className
+    i set its startingPoint
+
+element slides into scene
+
+create json with all startingelements for the Infinitybar (wall, floor etc) with the required information
+loop over it and spawn all of it, either with the satisfying algorithm or the random starting point one (chaos)
+
+later todo
+generate content outside of current barbounds 

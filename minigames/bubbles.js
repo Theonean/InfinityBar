@@ -20,6 +20,7 @@ function addBubble() {
   newDiv.style.setProperty("--velx", normalizedVel[0] * bubbleSpeed);
   newDiv.style.setProperty("--vely", normalizedVel[1] * bubbleSpeed);
   newDiv.style.top = 1 +'px';
+  newDiv.style.left = -1 +'px';
 
   // Add event listener to detect when the animation has finished and remove the bubble
   newDiv.addEventListener('animationend', () => {
