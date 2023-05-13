@@ -9,13 +9,22 @@ function initialize() {
     setInterval(addBubble, 100);
     //setInterval(moveBubbles, 40);
 
-    let roofTileSize = 32;
+    let tileSize = 32;
     let width = 17;
     let rows = 4;
     let yOffset = 32;
     
     //create initial rooftiles
-    tileArea(1920 / 6, -32, width, rows, roofTileSize, "roofTile");
+    tileArea(1920 / 6, -32, width, rows, tileSize, "roofTile");
+    
+    //create first layer of underground dirt
+    tileArea(1920 / 6, 480, width, rows, tileSize, "undergroundDirt");
+
+    //create floor
+    tileArea(1920 / 6, 32 * 11, width, 4, tileSize, "floorTile");
+
+    //create wall
+    tileArea(1920 / 6, 32 * 7, width, 8, tileSize, "wallTile");
 
 
     //load data from bardata.js into website

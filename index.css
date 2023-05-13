@@ -41,6 +41,33 @@ body {
     scale: 1;
 }
 
+.undergroundDirt {
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    background-image: url("sprites/BarElements/undergroundDirt.png");
+    z-index: 5;
+    scale: 1;
+}
+
+.floorTile {
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    background-image: url(sprites/BarElements/floor.png);
+    z-index: 1;
+    scale: 1;
+}
+
+.wallTile {
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    background-image: url(sprites/BarElements/wall.png);
+    z-index: 1;
+    scale: 1;
+}
+
 .barElement {
     animation-name: slidein_barElement;
     animation-duration: 3s;
@@ -131,7 +158,7 @@ body {
     background-image: url("sprites/BarElements/BarCounter.png");
 }
 
-#barstool {
+.barstool {
     position: absolute;
     width: 64px;
     height: 64px;
