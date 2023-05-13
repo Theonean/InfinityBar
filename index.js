@@ -4,12 +4,24 @@ var isPanning = false;
 function initialize() {
     //FRUITS
     //setInterval(addfruits, 3000);
-
+    loadMouseStuff();
     //BUBBLES
     setInterval(addBubble, 100);
     //setInterval(moveBubbles, 40);
 
+    let roofTileSize = 32;
+    let width = 17;
+    let rows = 4;
+    let yOffset = 32;
+    
+    //create initial rooftiles
+    tileArea(1920 / 6, -32, width, rows, roofTileSize, "roofTile");
+
+
+    //load data from bardata.js into website
     loadinteractables();
+
+    console.log(bardata);
 
     //global mouse variables
     var mouseX = 0;
@@ -34,6 +46,22 @@ function initialize() {
 
 
 
+}
+
+function tileArea(midX, midY, width, rows, tileWidth, className) {
+    //add tiles to json 
+    for (let iY = 0; iY < rows; iY++) {
+        for (let iX = -width; iX < width; iX++) {
+            bardata.push(
+                {
+                    "parent": "roof",
+                    "prefferedStartDir": 2,
+                    "endPos": [iX * tileWidth + midX, -iY * tileWidth + midY],
+                    "id": "roofTile" + iY * width + iX,
+                    "className": className
+                });
+        }
+    }
 }
 
 function movePupil(mouseX, mouseY, eye, pupil) {

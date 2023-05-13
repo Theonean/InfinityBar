@@ -40,7 +40,8 @@ var bardata = [
         "parent": "wrapper",
         "prefferedStartDir": 2,
         "endPos": [70, 180],
-        "id": "bubbleshooter"
+        "id": "bubbleshooter",
+        "clickbox":[30,30,]
         //"className": "my-class",
     },
     {

@@ -2,9 +2,11 @@ function loadinteractables() {
     var chaosOrSatisfying = "Chaos"; //"Satisfying" is the other option, temporary before ui is created for chaos or satisfying mode
     bardata.forEach((barPiece) => {
         if (chaosOrSatisfying === "Chaos") {
+            //CHAOS Spawns elements from random directions
             barElement.create(barPiece.parent, DirectionGod.getRandomDirection(), barPiece.endPos, barPiece.id, barPiece.className !== null ? barPiece.className: null);
         }
         else {
+            //SATISFYING makes elements slide into possition gracefully by making them move in only one direction from the preferred direction
             barElement.create(barPiece.parent, barPiece.prefferedStartDir, barPiece.endPos, barPiece.id, barPiece.className !== null ? barPiece.className: null);
         }
     });
@@ -90,9 +92,9 @@ class barElement {
         div.classList.add("barElement");
         div.id = id;
 
-
+        console.log(className);
         const randomPos = randomPosition();
-        console.log(randomPos)
+        //console.log(randomPos)
         switch (startDir) {
             case DirectionGod.getDirectionAtIndex(0):
                 // set startslideposition in a random position on the top border
