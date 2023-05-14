@@ -1,19 +1,20 @@
 function loadinteractables() {
     var chaosOrSatisfying = "Chaos"; //"Satisfying" is the other option, temporary before ui is created for chaos or satisfying mode
     bardata.forEach((barPiece) => {
-        if (chaosOrSatisfying === "Chaos") {
+        if (chaosOrSatisfying == "Chaos") {
             //CHAOS Spawns elements from random directions
-            barElement.create(barPiece.parent, DirectionGod.getRandomDirection(), barPiece.endPos, barPiece.id, barPiece.className !== null ? barPiece.className: null);
+            barElement.create(barPiece.parent, DirectionGod.getRandomDirection(), barPiece.endPos, barPiece.id, barPiece.className !== null ? barPiece.className : null);
         }
         else {
             //SATISFYING makes elements slide into possition gracefully by making them move in only one direction from the preferred direction
-            barElement.create(barPiece.parent, barPiece.prefferedStartDir, barPiece.endPos, barPiece.id, barPiece.className !== null ? barPiece.className: null);
+            barElement.create(barPiece.parent, barPiece.prefferedStartDir, barPiece.endPos, barPiece.id, barPiece.className !== null ? barPiece.className : null);
         }
     });
     /*
         spawnBottles(4, DirectionGod.getDirectionAtIndex(3), 32, [50, 100]);
         const bubbleshooter = barElement.create("wrapper", DirectionGod.getRandomDirection(), [67, 182], "bubbleshooter");
         */
+    bardata = [];
 }
 
 function spawnBottles(amount, creationDirection, pixelOffset, startSpawnPoint) {
@@ -83,7 +84,7 @@ class barElement {
      * @param {*} endPos end position for this element in scene in absolute pixel units with format [int X,int Y] Ex. [100,100]
      */
 
-    static create(parent, startDir, endPos, id, className = null) {
+    static create(parent, startDir, endPos, id, className = null, color = '#' + Math.floor(Math.random() * 16777215).toString(16)) {
         const parentDiv = document.getElementById(parent);
         const div = document.createElement('div');
         if (className !== null) {
@@ -119,6 +120,7 @@ class barElement {
 
         div.style.setProperty("--slideInEndX", `${endPos[0]}px`);
         div.style.setProperty("--slideInEndY", `${endPos[1]}px`);
+        div.style.accentColor = color;
 
         parentDiv.appendChild(div);
 
