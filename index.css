@@ -179,7 +179,7 @@ body {
     position: absolute;
     width: 64px;
     height: 64px;
-    z-index: 4;
+    z-index: 6;
     background-image: url("sprites/BarElements/BarStool.png");
 }
 

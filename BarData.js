@@ -33,8 +33,8 @@ var bardata = [
         "parent": "wrapper",
         "prefferedStartDir": 2,
         "endPos": [100, 240],
-        "id": "barstool"
-        //"className": "my-class",
+        "id": "barstool1",
+        "className": "barstool",
     },
     {
         "parent": "wrapper",
