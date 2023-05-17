@@ -1,3 +1,9 @@
+//moveOnPage.js
+/*
+    Panns the bar around when the user presses on it and moves
+    also updates the currentviewborder variable in tileMapper.js
+*/
+
 let isDown = false;
 let startX, startY, initialOffsetX, initialOffsetY;
 let wrapper;
@@ -5,6 +11,13 @@ const tileSize = 32;
 
 function loadMouseStuff() {
     wrapper = document.getElementById('wrapper');
+    const maxOffset = 500; // Maximum offset from the middle
+
+    let isDown = false;
+    let startX = 0;
+    let startY = 0;
+    let initialOffsetX = 0;
+    let initialOffsetY = 0;
 
     wrapper.addEventListener('mousedown', (e) => {
         isDown = true;
@@ -15,14 +28,10 @@ function loadMouseStuff() {
     });
 
     wrapper.addEventListener('mouseleave', () => {
-        //load data from bardata.js into website
-        loadinteractables();
         isDown = false;
     });
 
     wrapper.addEventListener('mouseup', () => {
-        //load data from bardata.js into website
-        loadinteractables();
         isDown = false;
     });
 
@@ -31,94 +40,40 @@ function loadMouseStuff() {
         e.preventDefault();
         const x = e.pageX;
         const y = e.pageY;
-        const walkX = (x - startX);
-        const walkY = (y - startY);
-        const newLeft = initialOffsetX + walkX;
-        const newTop = initialOffsetY + walkY;
+        const walkX = x - startX;
+        const walkY = y - startY;
+        let newLeft = initialOffsetX + walkX;
+        let newTop = initialOffsetY + walkY;
+
+        // Limit wrapper offset to stay within 500 pixels from the middle
+        const maxOffsetY = Math.min(maxOffset, Math.abs(newTop - window.innerHeight / 2));
+        newTop = (newTop < window.innerHeight / 2) ? window.innerHeight / 2 - maxOffsetY/2 : window.innerHeight / 2 + maxOffsetY;
 
         wrapper.style.left = newLeft + 'px';
         wrapper.style.top = newTop + 'px';
 
-        updateViewPosition(newLeft, newTop);
+        // Update currentViewBorder
+        currentViewBorder = getCurrentViewBorders();
+        console.log(currentViewBorder);
     });
 }
 
-// set initial values for max rendered positions
-let maxRendered = {
-    left: 200,
-    right: 0,
-    up: 0,
-    down: 0
-};
+function getCurrentViewBorders() {
+    // console.log(window.innerHeight + " Height"); // or
+    // console.log(window.innerWidth + " Width"); // or
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+    const scrollLeft = window.pageXOffset;
+    const scrollTop = window.pageYOffset;
+    const left = scrollLeft + parseInt(wrapper.style.left);
+    const right = -(left - windowWidth);
+    const up = scrollTop + parseInt(wrapper.style.top);
+    const down = -(up - windowHeight);
 
-// set initial values for max positions
-let maxLeft = 200;
-let maxRight = 0;
-let maxUp = 0;
-let maxDown = 0;
-
-function updateViewPosition(newLeft, newTop) {
-
-    // check if max values have changed
-    if (newLeft > maxLeft) {
-        let diff = newLeft - maxRendered.left;
-        maxLeft = newLeft;
-        console.log("max:" + maxLeft);
-        let width = Math.floor(diff / tileSize);
-        let midX = maxRendered.left - (((width) / 2) * tileSize);
-        console.log("Moved further to the left");
-        if (width > 0) {
-
-            console.log("Drawing to the left at:[" + midX + "|" + initialOffsetY + "] width: " + width);
-            // add tiles to the left
-            tileArea(-midX, 32 * 7, width, 8, tileSize, "wallTile");
-            maxRendered.left += width * tileSize;
-        }
-    }
-    if (newLeft < maxRight) {
-        let diff = maxRendered.right - newLeft;
-        maxRight = newLeft;
-        console.log("max:" + maxRight);
-        let width = Math.floor(diff / tileSize);
-        let midX = maxRendered.right + (((width) / 2) * tileSize - 400);
-        console.log("Moved further to the right");
-        if (width > 0) {
-
-            console.log("Drawing to the right at:[" + midX + "|" + initialOffsetY + "] width: " + width);
-            // add tiles to the right
-            tileArea(-midX, 32 * 7, width, 8, tileSize, "wallTile");
-            maxRendered.right -= width * tileSize;
-        }
-    }
-    if (newTop > maxUp) {
-        let diff = newTop - maxRendered.up;
-        maxUp = newTop;
-        console.log("max:" + maxUp);
-        let height = Math.floor(diff / tileSize);
-        let width = Math.floor((maxRendered.left - maxRendered.right) / 32);
-        let midY = maxRendered.up - (((height) / 2) * tileSize) + 256;
-        console.log("Moved further up");
-        if (height > 0) {
-
-            console.log("Drawing to the top at:[" + initialOffsetX + "|" + midY + "] height: " + height);
-            // add tiles to the top
-            tileArea(initialOffsetX, -midY, width, height, tileSize, "roofTile");
-            maxRendered.up += height * tileSize;
-        }
-    }
-    if (newTop < maxDown) {
-        let diff = maxRendered.down - newTop;
-        maxDown = newTop;
-        console.log("max:" + maxDown);
-        let height = Math.floor(diff / tileSize);
-        let midY = maxRendered.down + (((height) / 2) * tileSize);
-        console.log("Moved further down");
-        if (height > 0) {
-
-            console.log("Drawing to the bottom at:[" + initialOffsetX + "|" + midY + "] height: " + height);
-            // add tiles to the bottom
-            tileArea(initialOffsetX, midY, 20, height, tileSize, "undergroundDirt");
-            maxRendered.down -= height * tileSize;
-        }
-    }
+    return {
+        left,
+        right,
+        up,
+        down,
+    };
 }

@@ -41,7 +41,73 @@ var bardata = [
         "prefferedStartDir": 2,
         "endPos": [70, 180],
         "id": "bubbleshooter",
-        "clickbox":[30,30,]
+        "clickbox": [{
+            //fidget flag
+            "pos": { "x": -4, "y": 18 },
+            "size": { "x": 5, "y": 12 },
+            "color": "magenta",//"transparent",
+            "clickReaction": function () {
+                if (!bubbleshooterPlaying) {
+                    //if clicked and flag down, play flag up
+                    if (bubbleshooterFlagDown) {
+                        bubbleshooterAnimStart = 0;
+                        bubbleshooterAnimEnd = 6;
+                        bubbleSpeed = 10;
+                        coneAngle = 360; // in degrees
+                        bubbleDelay = 20;
+                    }
+                    else {
+                        bubbleshooterAnimStart = 8;
+                        bubbleshooterAnimEnd = 13;
+                        bubbleSpeed = 1;
+                        coneAngle = 45; // in degrees
+                        bubbleDelay = 200;
+                    }
+                    startBubbleInterval();
+                    bubbleshooterFrame = bubbleshooterAnimStart
+                    bubbleshooterFlagDown = !bubbleshooterFlagDown;
+                    bubbleshooterAnimLoop = false;
+                    bubbleshooterPlaying = true;
+                    console.log("Playing anim?");
+                }
+            }
+        },
+        {
+            //on / off button
+            "pos": { "x": 14, "y": 20 },
+            "size": { "x": 10, "y": 9 },
+            "color": "red",
+            "clickReaction": function () {
+                //
+
+                if (bubbleIntervalId) {
+                    stopBubbleInterval();
+
+                    bubbleshooterAnimStart = 0;
+                    bubbleshooterAnimEnd = 13;
+                    bubbleshooterAnimLoop = true;
+                    bubbleshooterPlaying = true;
+                    bubbleshooterFrame = bubbleshooterAnimStart
+                    bubbleshooterFlagDown = true;
+                }
+                else{
+                    //plays first frame so its "reset"
+                    bubbleshooterAnimLoop = false;
+                    bubbleshooterPlaying = true;
+                    bubbleshooterAnimStart = 0;
+                    bubbleshooterAnimEnd = 1;
+                    bubbleSpeed = 1;
+                    coneAngle = 45; // in degrees
+                    bubbleDelay = 200;
+
+                    startBubbleInterval();
+                }
+
+                console.log("Bubbeshooter on off button anim");
+
+
+            }
+        }]
         //"className": "my-class",
     },
     {

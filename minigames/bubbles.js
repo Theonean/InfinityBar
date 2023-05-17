@@ -1,5 +1,7 @@
 var bubbleSpeed = 1;
 var coneAngle = 45; // in degrees
+let bubbleDelay = 200;
+let bubbleIntervalId;
 
 function addBubble() {
   const bubblepopper = document.getElementById("bubbleshooter");
@@ -19,8 +21,8 @@ function addBubble() {
   // Sets the velocity of the bubble in the chosen direction
   newDiv.style.setProperty("--velx", normalizedVel[0] * bubbleSpeed);
   newDiv.style.setProperty("--vely", normalizedVel[1] * bubbleSpeed);
-  newDiv.style.top = 1 +'px';
-  newDiv.style.left = -1 +'px';
+  newDiv.style.top = 1 + 'px';
+  newDiv.style.left = -1 + 'px';
 
   // Add event listener to detect when the animation has finished and remove the bubble
   newDiv.addEventListener('animationend', () => {
@@ -33,5 +35,21 @@ function addBubble() {
 }
 
 function popBubble(bubblediv) {
+  playSoundFile('./sounds/bubblePop.mp3');
   bubblediv.remove();
+}
+
+// Function to start or restart the interval with a new delay
+function startBubbleInterval() {
+  if (bubbleIntervalId) {
+    clearInterval(bubbleIntervalId); // Clear existing interval
+  }
+  bubbleIntervalId = setInterval(addBubble, bubbleDelay);
+}
+
+function stopBubbleInterval() {
+  if (bubbleIntervalId) {
+    clearInterval(bubbleIntervalId); // Clear existing interval
+    bubbleIntervalId = "";
+  }
 }

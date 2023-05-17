@@ -1,13 +1,18 @@
 function loadinteractables() {
-    var chaosOrSatisfying = "Chaos"; //"Satisfying" is the other option, temporary before ui is created for chaos or satisfying mode
+    console.log("Loadinteractables called, building bardata...");
+    var LoadType = "Chaos"; //"Satisfying" is the other option, temporary before ui is created for chaos or satisfying mode
     bardata.forEach((barPiece) => {
-        if (chaosOrSatisfying == "Chaos") {
+        if (LoadType === "Chaos") {
             //CHAOS Spawns elements from random directions
-            barElement.create(barPiece.parent, DirectionGod.getRandomDirection(), barPiece.endPos, barPiece.id, barPiece.className !== null ? barPiece.className : null);
+            barElement.create(barPiece, DirectionGod.getRandomDirection());
         }
-        else {
+        else if (LoadType === "Satisfying") {
             //SATISFYING makes elements slide into possition gracefully by making them move in only one direction from the preferred direction
-            barElement.create(barPiece.parent, barPiece.prefferedStartDir, barPiece.endPos, barPiece.id, barPiece.className !== null ? barPiece.className : null);
+            barElement.create(barPiece, barPiece.prefferedStartDir);
+        }
+        else if (LoadType === "Centered") {
+            //SATISFYING makes elements slide into possition gracefully by making them move in only one direction from the preferred direction
+            barElement.create(barPiece, "Centered");
         }
     });
     /*
@@ -84,16 +89,20 @@ class barElement {
      * @param {*} endPos end position for this element in scene in absolute pixel units with format [int X,int Y] Ex. [100,100]
      */
 
-    static create(parent, startDir, endPos, id, className = null, color = '#' + Math.floor(Math.random() * 16777215).toString(16)) {
-        const parentDiv = document.getElementById(parent);
+    static create(barpiece, startDir, animationName = "spawnInBarElement") {
+
+        let color = '#' + Math.floor(Math.random() * 16777215).toString(16);
+        const parentDiv = document.getElementById(barpiece.parent);
         const div = document.createElement('div');
-        if (className !== null) {
-            div.classList.add(className);
+        if (barpiece.className !== null) {
+            div.classList.add(barpiece.className);
         }
         div.classList.add("barElement");
-        div.id = id;
+        div.id = barpiece.id;
 
-        console.log(className);
+        div.style.setProperty("--animationName", animationName);
+
+        console.log(startDir);
         const randomPos = randomPosition();
         //console.log(randomPos)
         switch (startDir) {
@@ -114,17 +123,54 @@ class barElement {
                 div.style.setProperty("--slideInStartX", 120 + "%");
                 div.style.setProperty("--slideInStartY", `${randomPos[1]}`);
                 break;
+            case "Centered":
+                div.style.setProperty("--slideInStartX", (currentViewBorder.left - currentViewBorder.right) / 2);
+                div.style.setProperty("--slideInStartY", (currentViewBorder.up - currentViewBorder.down) / 2);
+                break;
+
             default:
                 console.error('Invalid direction');
         }
 
-        div.style.setProperty("--slideInEndX", `${endPos[0]}px`);
-        div.style.setProperty("--slideInEndY", `${endPos[1]}px`);
+        div.style.setProperty("--slideInEndX", `${barpiece.endPos[0]}px`);
+        div.style.setProperty("--slideInEndY", `${barpiece.endPos[1]}px`);
         div.style.accentColor = color;
 
         parentDiv.appendChild(div);
 
+        // Check if this barPiece has a clickbox property
+        if (barpiece.clickbox) {
+            for (let index = 0; index < barpiece.clickbox.length; index++) {
+                this.addClickbox(div, barpiece.clickbox[index]);
+            }
+        }
+
         return div;
+    }
+
+    static addClickbox(div, clickbox) {
+        let clickboxDiv;
+        // Create a new div that will act as the clickable area
+        clickboxDiv = document.createElement('div');
+
+        // Set the position and size of the clickboxDiv according to the clickbox properties
+        clickboxDiv.style.position = 'absolute';
+        clickboxDiv.style.left = `${clickbox.pos.x}px`;
+        clickboxDiv.style.top = `${clickbox.pos.y}px`;
+        clickboxDiv.style.width = `${clickbox.size.x}px`;
+        clickboxDiv.style.height = `${clickbox.size.y}px`;
+
+        // Set visibility and other properties of the clickboxDiv
+        clickboxDiv.style.backgroundColor = clickbox.color;
+        clickboxDiv.style.zIndex = '9999'; // any sufficiently high value
+
+        // Add an onclick event listener to the clickboxDiv
+        clickboxDiv.addEventListener('click', clickbox.clickReaction);
+
+        // Add the clickboxDiv to the original div
+        div.appendChild(clickboxDiv);
+
+        return clickboxDiv;
     }
 }
 
@@ -133,3 +179,5 @@ function randomPosition() {
     const randomTop = Math.floor(Math.random() * 101); // generate random number between 0 and 100
     return [`${randomLeft}%`, `${randomTop}%`];
 }
+
+

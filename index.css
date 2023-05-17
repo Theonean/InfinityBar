@@ -10,7 +10,8 @@ body {
     width: 32px;
     height: 32px;
     position: absolute;
-    background-image: url("sprites/BarElements/bubbleCreator.png");
+    background: url("sprites/BarElements/bubbleCreator.png");
+    background-position: 0px 0px;
     z-index: 5;
 }
 
@@ -25,7 +26,7 @@ body {
 
 .can {
     width: 32px;
-    height: 32px;
+    height: 128px;
     position: absolute;
     background-image: url("sprites/BarElements/can.png");
     z-index: 5;
@@ -37,7 +38,7 @@ body {
     height: 32px;
     position: absolute;
     background-image: url("sprites/BarElements/tileableRoof.png");
-    z-index: 5;
+    z-index: 1;
     scale: 1;
 }
 
@@ -52,7 +53,7 @@ body {
 
 .floorTile {
     width: 32px;
-    height: 32px;
+    height: 128px;
     position: absolute;
     background-image: url(sprites/BarElements/floor.png);
     z-index: 1;
@@ -61,7 +62,7 @@ body {
 
 .wallTile {
     width: 32px;
-    height: 32px;
+    height: 256px;
     position: absolute;
     background-image: url(sprites/BarElements/wall.png);
     z-index: 1;
@@ -69,8 +70,10 @@ body {
 }
 
 .barElement {
-    animation-name: slidein_barElement;
-    animation-duration: 3s;
+    --animationName: "slidein_barElement";
+    animation-name: var(--animationName);
+
+    animation-duration: 1s;
     animation-timing-function: linear;
     animation-delay: 0s;
     animation-iteration-count: 1;
@@ -90,6 +93,20 @@ body {
     100% {
         top: var(--slideInEndY);
         left: var(--slideInEndX);
+    }
+}
+
+@keyframes spawnInBarElement {
+    0% {
+        top: var(--slideInEndY);
+        left: var(--slideInEndX);
+        scale: 0;
+    }
+
+    100% {
+        top: var(--slideInEndY);
+        left: var(--slideInEndX);
+        scale: 1;
     }
 }
 
