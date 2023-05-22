@@ -45,29 +45,56 @@ var bardata = [
             //fidget flag
             "pos": { "x": -4, "y": 18 },
             "size": { "x": 5, "y": 12 },
-            "color": "magenta",//"transparent",
+            "color": "transparent",
             "clickReaction": function () {
-                if (!bubbleshooterPlaying) {
-                    //if clicked and flag down, play flag up
-                    if (bubbleshooterFlagDown) {
-                        bubbleshooterAnimStart = 0;
-                        bubbleshooterAnimEnd = 6;
+                let idName = "bubbleshooter"
+                let bubbleShooterDiv = document.getElementById(idName);
+                let bubbleData;
+                //initialize needed variables to animate this div
+                if (!divsToAnimate.has(idName)) {
+                    console.log("Writing first time data");
+                    bubbleData = {
+                        "div": bubbleShooterDiv,
+                        "Frames": 18,
+                        "Frame": 0,
+                        "AnimStart": 0,
+                        "AnimEnd": 6,
+                        "Playing": false,
+                        "AnimLoop": false,
+                        "FlagDown": false,
+                        "frameWidth": 32
+                    }
+
+                    bubbleSpeed = 1;
+                    coneAngle = 45; // in degrees
+                    bubbleDelay = 200;
+                    divsToAnimate.set(idName, bubbleData);
+                    //only react to clicks when no animations are playing
+                }
+
+                //console.log(idName);
+                bubbleData = divsToAnimate.get(idName);
+
+                if (!bubbleData.Playing) {
+                    //raise flag up and set chaos bubble mode on
+                    if (bubbleData.FlagDown) {
+                        bubbleData.AnimStart = 0;
+                        bubbleData.AnimEnd = 6;
                         bubbleSpeed = 10;
                         coneAngle = 360; // in degrees
                         bubbleDelay = 20;
-                    }
-                    else {
-                        bubbleshooterAnimStart = 8;
-                        bubbleshooterAnimEnd = 13;
+                        //descend flag to normal again
+                    } else {
+                        bubbleData.AnimStart = 8;
+                        bubbleData.AnimEnd = 13;
                         bubbleSpeed = 1;
                         coneAngle = 45; // in degrees
                         bubbleDelay = 200;
                     }
                     startBubbleInterval();
-                    bubbleshooterFrame = bubbleshooterAnimStart
-                    bubbleshooterFlagDown = !bubbleshooterFlagDown;
-                    bubbleshooterAnimLoop = false;
-                    bubbleshooterPlaying = true;
+                    bubbleData.Frame = bubbleData.AnimStart;
+                    bubbleData.FlagDown = !bubbleData.FlagDown;
+                    bubbleData.Playing = true;
                     console.log("Playing anim?");
                 }
             }
@@ -76,26 +103,49 @@ var bardata = [
             //on / off button
             "pos": { "x": 14, "y": 20 },
             "size": { "x": 10, "y": 9 },
-            "color": "red",
+            "color": "transparent",
             "clickReaction": function () {
-                //
+                let idName = "bubbleshooter"
+                let bubbleShooterDiv = document.getElementById(idName);
+                let bubbleData;
+                //initialize needed variables to animate this div
+                if (!divsToAnimate.has(idName)) {
+                    console.log("Writing first time data");
+                    bubbleData = {
+                        "div": bubbleShooterDiv,
+                        "Frames": 18,
+                        "Frame": 0,
+                        "AnimStart": 0,
+                        "AnimEnd": 6,
+                        "Playing": false,
+                        "AnimLoop": false,
+                        "FlagDown": false,
+                        "frameWidth": 32
+                    }
+
+                    bubbleSpeed = 1;
+                    coneAngle = 45; // in degrees
+                    bubbleDelay = 200;
+                    divsToAnimate.set(idName, bubbleData);
+                    //only react to clicks when no animations are playing
+                }
+
+                //console.log(idName);
+                bubbleData = divsToAnimate.get(idName);
 
                 if (bubbleIntervalId) {
                     stopBubbleInterval();
 
-                    bubbleshooterAnimStart = 0;
-                    bubbleshooterAnimEnd = 13;
-                    bubbleshooterAnimLoop = true;
-                    bubbleshooterPlaying = true;
-                    bubbleshooterFrame = bubbleshooterAnimStart
-                    bubbleshooterFlagDown = true;
+                    bubbleData.AnimStart = 0;
+                    bubbleData.AnimLoop = true;
+                    bubbleData.Playing = true;
+                    bubbleData.Frame = bubbleData.AnimStart;
+                    bubbleData.FlagDown = true;
                 }
-                else{
+                else {
                     //plays first frame so its "reset"
-                    bubbleshooterAnimLoop = false;
-                    bubbleshooterPlaying = true;
-                    bubbleshooterAnimStart = 0;
-                    bubbleshooterAnimEnd = 1;
+                    bubbleData.AnimLoop = false;
+                    bubbleData.Playing = true;
                     bubbleSpeed = 1;
                     coneAngle = 45; // in degrees
                     bubbleDelay = 200;
@@ -172,5 +222,42 @@ var bardata = [
         "endPos": [120, 78],
         "id": " can6",
         "className": "can"
+    },
+    {
+        "parent": "wrapper",
+        "prefferedStartDir": 2,
+        "endPos": [30, 280],
+        "id": "spaceship",
+        "clickbox": [{
+            "pos": { "x": 0, "y": 0 },
+            "size": { "x": 30, "y": 40 },
+            "color": "transparent",
+            "clickReaction": function () {
+                let idName = "spaceship"
+                let div = document.getElementById(idName);
+                let spaceData;
+                //initialize needed variables to animate this div on first click
+                if (!divsToAnimate.has(idName)) {
+                    console.log("Writing first time data");
+                    spaceData = {
+                        "div": div,
+                        "Frames": 37,
+                        "Frame": 0,
+                        "AnimStart": 0,
+                        "AnimEnd": 37,
+                        "AnimLoop": false,
+                        "frameWidth": 400
+                    }
+                    divsToAnimate.set(idName, spaceData);
+                }
+
+                //console.log(idName);
+                spaceData = divsToAnimate.get(idName);
+
+                if (!spaceData.Playing) {
+                   spaceData.Playing = true;
+                }
+            }
+        }]
     }
 ];

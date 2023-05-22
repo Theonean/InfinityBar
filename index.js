@@ -30,8 +30,6 @@ function initialize() {
     //load data from bardata.js into website
     loadinteractables();
 
-    console.log(bardata);
-
     //global mouse variables
     var mouseX = 0;
     var mouseY = 0;
