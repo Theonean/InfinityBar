@@ -33,6 +33,16 @@ body {
     scale: 1.5;
 }
 
+#spaceship {
+    width: 400px;
+    height: 200px;
+    position: absolute;
+    background: url("sprites/BarElements/SpaceShip.png");
+    background-position: 0px 0px;
+    z-index: 1;
+    scale: 1;
+}
+
 .roofTile {
     width: 32px;
     height: 32px;
