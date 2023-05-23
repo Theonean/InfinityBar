@@ -52,6 +52,15 @@ body {
     scale: 1;
 }
 
+.roofWallTransition {
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    background-image: url("sprites/BarElements/roofWallTransition.png");
+    z-index: 1;
+    scale: 1;
+}
+
 .undergroundDirt {
     width: 32px;
     height: 32px;
@@ -72,7 +81,7 @@ body {
 
 .wallTile {
     width: 32px;
-    height: 256px;
+    height: 288px;
     position: absolute;
     background-image: url(sprites/BarElements/wall.png);
     z-index: 1;
