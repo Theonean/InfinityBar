@@ -202,6 +202,15 @@ body {
     scale: 0.1;
 }
 
+.arcade {
+    position: absolute;
+    width: 247px;
+    height: 383px;
+    z-index: 5;
+    background-image: url("sprites/BarElements/arcade.png");
+    scale: 0.6;
+}
+
 /*
     Bartender and his body parts
 */
