@@ -31,7 +31,7 @@ const Directions = {
 };
 
 let floorY = 32 * 9;
-let wallY = 32 * 7 - 192;
+let wallY = 32 *6 - 192;
 
 //call updatemap every 0.2 seconds
 function updatemap() {
@@ -74,10 +74,10 @@ function updatemap() {
                     tileArea(midX, wallY, width, 1, tileSize, "wallTile");
 
                     //create roof // sky
-                    midY = 32 * 0;
+                    midY = -32 * 2;
                     console.log("Drawing roof left at[" + midX + "|" + midY + "]");
                     //create roof side box
-                    tileArea(midX, -midY, width, 12, tileSize, "roofTile");
+                    tileArea(midX, midY, width, 4, tileSize, "roofTile");
 
                     //create underground
                     midY = 32 * 24;
