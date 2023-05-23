@@ -40,7 +40,7 @@ var bardata = [
         "parent": "wrapper",
         "prefferedStartDir": 2,
         "endPos": [140, 100],
-        "id": "person1",
+        "id": "person0",
         "className": "person",
     },
     {
