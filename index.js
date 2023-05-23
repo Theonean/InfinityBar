@@ -7,7 +7,7 @@ function initialize() {
     loadMouseStuff();
     //BUBBLES
     startBubbleInterval();
-    setInterval(updatemap, 2000);
+    setInterval(updatemap, 200);
     //setInterval(moveBubbles, 40);
 
     // Call the lazyLoadElements function on page load and scroll events
@@ -47,9 +47,6 @@ function initialize() {
         movePupil(mouseX, mouseY, eye1, pupil1);
         movePupil(mouseX, mouseY, eye2, pupil2);
     });
-
-    //Move the wrapper when the user leftclicks and drags the canvas
-    const wrapper = document.getElementById('wrapper');
 
     // Start the animation
     requestAnimationFrame(animate);

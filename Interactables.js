@@ -102,7 +102,7 @@ class barElement {
 
         div.style.setProperty("--animationName", animationName);
 
-        console.log(startDir);
+        //console.log(startDir);
         const randomPos = randomPosition();
         //console.log(randomPos)
         switch (startDir) {

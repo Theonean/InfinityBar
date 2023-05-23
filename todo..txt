@@ -68,3 +68,5 @@ add system that spawns hitbox and places it next to object
 -chair to swivel it
 -bottles to break them
 -screen with text that loads up pong when you break it
+
+added project to git, see commit history

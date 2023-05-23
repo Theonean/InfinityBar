@@ -54,7 +54,7 @@ function loadMouseStuff() {
 
         // Update currentViewBorder
         currentViewBorder = getCurrentViewBorders();
-        console.log(currentViewBorder);
+        //console.log(currentViewBorder);
     });
 }
 
