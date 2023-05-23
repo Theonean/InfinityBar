@@ -79,15 +79,6 @@ body {
     scale: 1;
 }
 
-.wallRoofTransition {
-    width: 32px;
-    height: 32px;
-    position: absolute;
-    background-image: url(sprites/BarElements/ro.png);
-    z-index: 1;
-    scale: 1;
-}
-
 /* Backround tile, automatically loaded in*/
 .wallTile {
     width: 32px;
