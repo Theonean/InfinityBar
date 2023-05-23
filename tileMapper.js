@@ -16,6 +16,13 @@ let currentViewBorder = {
     down: 0
 };
 
+let arcadesMaxRendered = {
+    currentLeft: 0,
+    renderedLeft: 500,
+    currentRight: 0,
+    renderedRight: 500
+};
+
 const Directions = {
     LEFT: 'left',
     RIGHT: 'right',
@@ -24,7 +31,7 @@ const Directions = {
 };
 
 let floorY = 32 * 9;
-let wallY = 32 * 7 - 192;
+let wallY = 32 *6 - 192;
 
 //call updatemap every 0.2 seconds
 function updatemap() {
@@ -44,7 +51,7 @@ function updatemap() {
         console.log("render max: " + currentBorderRenderedMax);
         console.log("difference: " + diff);
 */
-        //If diff is smaller than 0, place tiles and update renderededarea
+        //If diff is smaller than 0, place tiles and update rendered area
         if (diff < 0) {
             let width = Math.abs(Math.floor(diff / tileSize));
             width += width % 2; //rounds the value up to a round number divisible by 2
@@ -67,16 +74,25 @@ function updatemap() {
                     tileArea(midX, wallY, width, 1, tileSize, "wallTile");
 
                     //create roof // sky
-                    midY = 32 * 0;
+                    midY = -32 * 2;
                     console.log("Drawing roof left at[" + midX + "|" + midY + "]");
                     //create roof side box
-                    tileArea(midX, -midY, width, 12, tileSize, "roofTile");
+                    tileArea(midX, midY, width, 4, tileSize, "roofTile");
 
                     //create underground
                     midY = 32 * 24;
                     console.log("Drawing roof left at[" + midX + "|" + midY + "]");
                     //create underground dirt
                     tileArea(midX, midY, width, 12, tileSize, "undergroundDirt");
+
+                    //add arcades
+                    let lastArcadePosition = (currentDirectionIndex === "left") ? arcadesMaxRendered.renderedLeft : arcadesMaxRendered.renderedRight;
+                    let arcadeDiff = maxRendered[currentDirectionIndex] - lastArcadePosition;
+
+                    //place arcade each 64 pixels
+                    if (arcadeDiff >= 64) {
+
+                    }
                     break;
             }
         }
@@ -100,7 +116,24 @@ function parseIndexToDirection(index) {
     }
 }
 
-function determineClass(direction, height) {
+let interactiveElementNo = 0;
+function addInteractiveElement(x, y, className, clickbox = "") {
+    let newData = {
+        "parent": "wrapper",
+        "prefferedStartDir": 2,
+        "endPos": [x,y],
+        "id": className + interactiveElementNo,
+        "className": className
+    };
 
-    return "fuckye";
+    clickbox !== "" ? newData.push(clickbox) : null;
+
+    //add tiles to json 
+    bardata.push(newData);
+
+    interactiveElementNo++;
+}
+
+function createArcadeClickbox() {
+    return "";
 }
