@@ -28,9 +28,9 @@ body {
     width: 32px;
     height: 32px;
     position: absolute;
-    background-image: url("sprites/BarElements/can.png");
+    background: url("sprites/BarElements/can.png");
+    background-position: 0px 0px;
     z-index: 3;
-    scale: 1.5;
 }
 
 #spaceship {
@@ -38,7 +38,6 @@ body {
     height: 200px;
     position: absolute;
     background: url("sprites/BarElements/SpaceShip.png");
-    background-position: 0px 0px;
     z-index: 1;
     scale: 1;
 }
