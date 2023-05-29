@@ -58,6 +58,7 @@ function updatemap() {
         if (diff < 0) {
             let width = Math.abs(Math.floor(diff / tileSize));
             width += width % 2; //rounds the value up to a round number divisible by 2
+            width = 1;
             let midX;
             let midY;
             //sets new maxrender position with width
@@ -78,18 +79,24 @@ function updatemap() {
                     //create wall
                     tileArea(midX, wallY, width, 1, tileSize, "wallTile");
 
-                    //create roof // sky
+                    //create roof 
                     midY = -32 * 2;
-                    console.log("Drawing roof left at[" + midX + "|" + midY + "]");
+                    console.log("Drawing roof " + currentDirectionIndex + " at[" + midX + "|" + midY + "]");
                     //create roof side box
                     tileArea(midX, midY, width, 4, tileSize, "roofTile");
 
+                    //create sky 
+                    midY = -32 * 6;
+                    console.log("Drawing sky " + currentDirectionIndex + " at[" + midX + "|" + midY + "]");
+                    //create roof side box
+                    tileArea(midX, midY, width, 4, tileSize, "sky", skyOnload);
+
                     //create underground
                     midY = 32 * 24;
-                    console.log("Drawing roof left at[" + midX + "|" + midY + "]");
+                    console.log("Drawing Underground " + currentDirectionIndex + " at[" + midX + "|" + midY + "]");
                     //create underground dirt
                     tileArea(midX, midY, width, 12, tileSize, "undergroundDirt");
-                    
+
                     // add arcades
                     let isLeftDirection = (currentDirectionIndex === "left");
                     let lastArcadePosition = isLeftDirection ? -arcadesMaxRendered.renderedLeft : arcadesMaxRendered.renderedRight;
@@ -161,3 +168,66 @@ function addInteractiveElement(x, y, className, clickbox = "") {
 
     interactiveElementNo++;
 }
+
+//Returns the clickbox object required for creation of a clickbox plus logic for clickin
+function createArcadeClickbox(number) {
+    return [{
+        "pos": { "x": 0, "y": 0 },
+        "size": { "x": 200, "y": 200 },
+        "color": "red",
+        "clickReaction": function () {
+            let idName = "arcade" + number;
+            console.log(idName);
+            let div = document.getElementById(idName);
+            let data;
+
+            //initialize needed variables to animate this div on first click
+            if (!divsToAnimate.has(idName)) {
+                console.log("Writing first time data");
+                data = {
+                    "div": div,
+                    "Frames": 0,
+                    "Frame": 0,
+                    "AnimStart": 0,
+                    "AnimEnd": 0,
+                    "AnimLoop": false,
+                    "frameWidth": 400
+                }
+                divsToAnimate.set(idName, data);
+            }
+
+            //console.log(idName);
+            data = divsToAnimate.get(idName);
+            console.log("Arcade clicked");
+            //only interactable when not playing right now --> may use external interrupts like button on bubbleshooter
+            if (!data.Playing) {
+                data.Playing = true;
+
+                //implement logic for clicking here
+            }
+        }
+    }];
+}
+
+let skyOnload = function (div) {
+        let idName = div.id;
+        let data;
+
+        div.style.setProperty("--tileNumber", Math.floor(Math.random() * 4));
+
+        console.log("Writing first time SKY data");
+        data = {
+            "div": div,
+            "Frames": 3,
+            "Frame": 0,
+            "AnimStart": 0,
+            "AnimEnd": 3,
+            "AnimLoop": true,
+            "frameWidth": 32
+        };
+        divsToAnimate.set(idName, data);
+
+
+        data = divsToAnimate.get(idName);
+        data.Playing = true;
+    };

@@ -51,6 +51,15 @@ body {
     scale: 1;
 }
 
+.roofWallTransition {
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    background-image: url("sprites/BarElements/roofWallTransition.png");
+    z-index: 1;
+    scale: 1;
+}
+
 .undergroundDirt {
     width: 32px;
     height: 32px;
@@ -69,24 +78,29 @@ body {
     scale: 1;
 }
 
-.wallRoofTransition {
+.sky {
+    --tileNumber: 1;
+    --yPos: calc(var(--tileNumber) * -32px);
     width: 32px;
     height: 32px;
     position: absolute;
-    background-image: url(sprites/BarElements/ro.png);
-    z-index: 1;
+    background: url("sprites/BarElements/clouds.png");
+    background-position: 0px var(--yPos);
+    z-index: 5;
     scale: 1;
 }
+
 
 /* Backround tile, automatically loaded in*/
 .wallTile {
     width: 32px;
-    height: 256px;
+    height: 288px;
     position: absolute;
     background-image: url(sprites/BarElements/wall.png);
     z-index: 1;
     scale: 1;
 }
+
 
 .barElement {
     --animationName: "slidein_barElement";

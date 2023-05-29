@@ -1,14 +1,14 @@
 function loadinteractables() {
     console.log("Loadinteractables called, building bardata...");
-    var LoadType = "Chaos"; //"Satisfying" is the other option, temporary before ui is created for chaos or satisfying mode
+    var LoadType = "Chaos";//Math.random() > 0.5 ? "Chaos" : "Satisfying"; //"Satisfying" is the other option, temporary before ui is created for chaos or satisfying mode
     bardata.forEach((barPiece) => {
         if (LoadType === "Chaos") {
             //CHAOS Spawns elements from random directions
-            barElement.create(barPiece, DirectionGod.getRandomDirection());
+            barElement.create(barPiece, DirectionGod.getRandomDirection(), "slidein_barElement");
         }
         else if (LoadType === "Satisfying") {
             //SATISFYING makes elements slide into possition gracefully by making them move in only one direction from the preferred direction
-            barElement.create(barPiece, barPiece.prefferedStartDir);
+            barElement.create(barPiece, barPiece.prefferedStartDir, "spawnInBarElement");
         }
         else if (LoadType === "Centered") {
             //SATISFYING makes elements slide into possition gracefully by making them move in only one direction from the preferred direction
@@ -143,6 +143,11 @@ class barElement {
             for (let index = 0; index < barpiece.clickbox.length; index++) {
                 this.addClickbox(div, barpiece.clickbox[index]);
             }
+        }
+
+        if(barpiece.onload){
+            barpiece.onload(div);
+            console.log("ONLOAD");
         }
 
         return div;

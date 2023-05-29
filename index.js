@@ -52,18 +52,26 @@ function initialize() {
     requestAnimationFrame(animate);
 }
 
-function tileArea(midX, midY, width, rows, tileWidth, className) {
+function tileArea(midX, midY, width, rows, tileWidth, className, onload = "") {
     //add tiles to json 
     for (let iY = 0; iY < rows; iY++) {
         for (let iX = -width / 2; iX < width / 2; iX++) {
-            bardata.push(
-                {
-                    "parent": "bgTiles",
-                    "prefferedStartDir": 2,
-                    "endPos": [iX * tileWidth + midX, -iY * tileWidth + midY],
-                    "id": "roofTile" + iY * width + iX,
-                    "className": className
-                });
+            let data =
+            {
+                "parent": "bgTiles",
+                "prefferedStartDir": 2,
+                "endPos": [iX * tileWidth + midX, -iY * tileWidth + midY],
+                "id": "roofTile" + iY * width + iX,
+                "className": className
+            };
+
+            //add onload function if needed
+            if (onload !== "") {
+                data["onload"] = onload;
+                console.log(onload);
+            }
+
+            bardata.push(data);
         }
     }
 }
