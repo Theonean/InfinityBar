@@ -192,43 +192,49 @@ var bardata = [
         "parent": "wrapper",
         "prefferedStartDir": 2,
         "endPos": [150, 78],
-        "id": " can1",
-        "className": "can"
+        "id": "can1",
+        "className": "can",
+        "clickbox": createCanClickbox(1)
     },
     {
         "parent": "wrapper",
         "prefferedStartDir": 2,
         "endPos": [180, 78],
-        "id": " can2",
-        "className": "can"
+        "id": "can2",
+        "className": "can",
+        "clickbox": createCanClickbox(2)
     },
     {
         "parent": "wrapper",
         "prefferedStartDir": 2,
         "endPos": [210, 78],
-        "id": " can3",
-        "className": "can"
+        "id": "can3",
+        "className": "can",
+        "clickbox": createCanClickbox(3)
     },
     {
         "parent": "wrapper",
         "prefferedStartDir": 2,
         "endPos": [240, 78],
-        "id": " can4",
-        "className": "can"
+        "id": "can4",
+        "className": "can",
+        "clickbox": createCanClickbox(4)
     },
     {
         "parent": "wrapper",
         "prefferedStartDir": 2,
         "endPos": [270, 78],
-        "id": " can5",
-        "className": "can"
+        "id": "can5",
+        "className": "can",
+        "clickbox": createCanClickbox(5)
     },
     {
         "parent": "wrapper",
         "prefferedStartDir": 2,
         "endPos": [120, 78],
-        "id": " can6",
-        "className": "can"
+        "id": "can6",
+        "className": "can",
+        "clickbox": createCanClickbox(6)
     },
     {
         "parent": "wrapper",
@@ -262,9 +268,126 @@ var bardata = [
                 spaceData = divsToAnimate.get(idName);
 
                 if (!spaceData.Playing) {
-                   spaceData.Playing = true;
+                    spaceData.Playing = true;
                 }
             }
         }]
     }
 ];
+
+
+//FUNCTIONS TO GENERATE CLICKBOXES
+
+//Returns the clickbox object required for creation of a clickbox plus logic for clickin
+function createArcadeClickbox(number) {
+    return [{
+        "pos": { "x": 0, "y": 0 },
+        "size": { "x": 200, "y": 200 },
+        "color": "transparent",
+        "clickReaction": function () {
+            let idName = "arcade" + number;
+            console.log(idName);
+            let div = document.getElementById(idName);
+            let data;
+
+            //initialize needed variables to animate this div on first click
+            if (!divsToAnimate.has(idName)) {
+                console.log("Writing first time data");
+                data = {
+                    "div": div,
+                    "Frames": 0,
+                    "Frame": 0,
+                    "AnimStart": 0,
+                    "AnimEnd": 0,
+                    "AnimLoop": false,
+                    "frameWidth": 400
+                }
+                divsToAnimate.set(idName, data);
+            }
+
+            //console.log(idName);
+            data = divsToAnimate.get(idName);
+            console.log("Arcade clicked");
+            //only interactable when not playing right now --> may use external interrupts like button on bubbleshooter
+            if (!data.Playing) {
+                data.Playing = true;
+
+                //implement logic for clicking here
+            }
+        }
+    }];
+}
+
+//Returns the clickbox object required forcans
+function createCanClickbox(number) {
+    return [{
+        "pos": { "x": 10, "y": 8 },
+        "size": { "x": 13, "y": 22 },
+        "color": "transparent",
+        "clickReaction": function () {
+            let idName = "can" + number;
+            console.log(idName);
+            let div = document.getElementById(idName);
+            let data;
+
+            //initialize needed variables to animate this div on first click
+            if (!divsToAnimate.has(idName)) {
+                console.log("Writing first time data");
+                data = {
+                    "div": div,
+                    "Frames": 50,
+                    "Frame": 0,
+                    "AnimStart": 0,
+                    "AnimEnd": 1,
+                    "AnimLoop": false,
+                    "frameWidth": 32,
+                    "numClicked": 0
+                }
+                divsToAnimate.set(idName, data);
+            }
+
+            //console.log(idName);
+            data = divsToAnimate.get(idName);
+            console.log("data");
+            console.log(data);
+            console.log("Arcade clicked");
+            //only interactable when not playing right now --> may use external interrupts like button on bubbleshooter
+            if (!data.Playing) {
+                data.Playing = true;
+
+                //first three clicks create indents oncan
+                switch (data.numClicked) {
+                    case 0:
+                        data.AnimStart = 1;
+                        data.AnimEnd = 2;
+                        data.AnimLoop = false;
+                        break;
+                    case 1:
+                        data.AnimStart = 2;
+                        data.AnimEnd = 3;
+                        data.AnimLoop = false;
+                        break;
+                    case 2:
+                        data.Frame = 3;
+                        data.AnimStart = 26;
+                        data.AnimEnd = 31;
+                        data.AnimLoop = true;
+                        break;
+                }
+
+                data.numClicked += 1;
+            }
+            //wavingcan be interrupted by another click oncan
+            else {
+                if (data.numClicked === 3) {
+                    data.AnimEnd = 50;
+                    data.AnimLoop = false;
+                    data.numClicked = 0;
+
+                }
+            }
+
+            console.log("canclicks: " + data.numClicked);
+        }
+    }];
+}
