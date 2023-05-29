@@ -21,7 +21,7 @@ function animate(time) {
             //console.log(key, value);
             playFrameForDiv(value);
         }
-        
+
         // Increment the frame index
         frameIndex++;
 
@@ -39,14 +39,20 @@ function playFrameForDiv(divDataObject) {
     if (data.Playing) {
         let divFrame = data.Frame;
         let frameWidth = data.frameWidth;
-        console.log(divFrame + " " + data);
-        console.log(data);
-        data.div.style.backgroundPosition = `${-(divFrame * frameWidth)}px 0px`;
+        //console.log(divFrame + " " + data);
+        //console.log(data);
+
+        let frameY = 0;
+        if (data.div.style.getPropertyValue("--tileNumber") !== null) {
+            frameY = data.div.style.getPropertyValue("--tileNumber");
+            console.log(frameY + " frameY"); 
+        }
+        data.div.style.backgroundPosition = `${-(divFrame * frameWidth)}px ${frameY * 32}px`;
 
         // Increment the frame index
         divFrame += 1;
         data.Frame = divFrame;
-        console.log("New frame! " + divFrame);
+        //console.log("New frame! " + divFrame);
 
 
         // Reset the frame index if it is the last frame

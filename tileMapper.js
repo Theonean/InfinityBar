@@ -58,6 +58,7 @@ function updatemap() {
         if (diff < 0) {
             let width = Math.abs(Math.floor(diff / tileSize));
             width += width % 2; //rounds the value up to a round number divisible by 2
+            width = 1;
             let midX;
             let midY;
             //sets new maxrender position with width
@@ -78,18 +79,24 @@ function updatemap() {
                     //create wall
                     tileArea(midX, wallY, width, 1, tileSize, "wallTile");
 
-                    //create roof // sky
+                    //create roof 
                     midY = -32 * 2;
                     console.log("Drawing roof " + currentDirectionIndex + " at[" + midX + "|" + midY + "]");
                     //create roof side box
                     tileArea(midX, midY, width, 4, tileSize, "roofTile");
+
+                    //create sky 
+                    midY = -32 * 6;
+                    console.log("Drawing sky " + currentDirectionIndex + " at[" + midX + "|" + midY + "]");
+                    //create roof side box
+                    tileArea(midX, midY, width, 4, tileSize, "sky", skyOnload);
 
                     //create underground
                     midY = 32 * 24;
                     console.log("Drawing Underground " + currentDirectionIndex + " at[" + midX + "|" + midY + "]");
                     //create underground dirt
                     tileArea(midX, midY, width, 12, tileSize, "undergroundDirt");
-                    
+
                     // add arcades
                     let isLeftDirection = (currentDirectionIndex === "left");
                     let lastArcadePosition = isLeftDirection ? -arcadesMaxRendered.renderedLeft : arcadesMaxRendered.renderedRight;
@@ -201,3 +208,26 @@ function createArcadeClickbox(number) {
         }
     }];
 }
+
+let skyOnload = function (div) {
+        let idName = div.id;
+        let data;
+
+        div.style.setProperty("--tileNumber", Math.floor(Math.random() * 4));
+
+        console.log("Writing first time SKY data");
+        data = {
+            "div": div,
+            "Frames": 3,
+            "Frame": 0,
+            "AnimStart": 0,
+            "AnimEnd": 3,
+            "AnimLoop": true,
+            "frameWidth": 32
+        };
+        divsToAnimate.set(idName, data);
+
+
+        data = divsToAnimate.get(idName);
+        data.Playing = true;
+    };

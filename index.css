@@ -79,6 +79,19 @@ body {
     scale: 1;
 }
 
+.sky {
+    --tileNumber: 1;
+    --yPos: calc(var(--tileNumber) * -32px);
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    background: url("sprites/BarElements/clouds.png");
+    background-position: 0px var(--yPos);
+    z-index: 5;
+    scale: 1;
+}
+
+
 /* Backround tile, automatically loaded in*/
 .wallTile {
     width: 32px;
@@ -88,6 +101,7 @@ body {
     z-index: 1;
     scale: 1;
 }
+
 
 .barElement {
     --animationName: "slidein_barElement";
