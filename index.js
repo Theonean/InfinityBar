@@ -61,7 +61,7 @@ function tileArea(midX, midY, width, rows, tileWidth, className, onload = "") {
                 "parent": "bgTiles",
                 "prefferedStartDir": 2,
                 "endPos": [iX * tileWidth + midX, -iY * tileWidth + midY],
-                "id": "roofTile" + iY * width + iX,
+                "id": className + interactiveElementNo,
                 "className": className
             };
 
@@ -72,6 +72,7 @@ function tileArea(midX, midY, width, rows, tileWidth, className, onload = "") {
             }
 
             bardata.push(data);
+            interactiveElementNo++;
         }
     }
 }

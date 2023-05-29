@@ -84,12 +84,18 @@ function updatemap() {
                     console.log("Drawing roof " + currentDirectionIndex + " at[" + midX + "|" + midY + "]");
                     //create roof side box
                     tileArea(midX, midY, width, 1, tileSize, "roofTile");
+                    
+                    //create roof - wall transition
+                    midY = -32 * 1;
+                    console.log("Drawing roofWallTransition " + currentDirectionIndex + " at[" + midX + "|" + midY + "]");
+                    //create roof side box
+                    tileArea(midX, midY, width, 1, tileSize, "roofWallTransition");
 
                     //create sky 
-                    midY = -32 * 6;
+                    midY = -32 * 12;
                     console.log("Drawing sky " + currentDirectionIndex + " at[" + midX + "|" + midY + "]");
                     //create roof side box
-                    tileArea(midX, midY, width, 4, tileSize, "sky", skyOnload);
+                    tileArea(midX, midY, width, 1, tileSize, "sky", skyOnload);
 
                     //create underground
                     midY = 32 * 24;
@@ -118,7 +124,7 @@ function updatemap() {
                             let posX = isLeftDirection ? lastArcadePosition - arcadeDistance * (i + 1) : lastArcadePosition + arcadeDistance * (i + 1);
                             let clickbox = createArcadeClickbox(interactiveElementNo);
                             //console.log(clickbox);
-                            addInteractiveElement(posX, 0, "arcade", clickbox);
+                            addInteractiveElement(posX, 30, "arcade", clickbox);
 
                             //Updates maxrendered depending on direction
                             isLeftDirection ? arcadesMaxRendered.renderedLeft += arcadeDistance : arcadesMaxRendered.renderedRight += arcadeDistance;
@@ -174,7 +180,7 @@ function createArcadeClickbox(number) {
     return [{
         "pos": { "x": 0, "y": 0 },
         "size": { "x": 200, "y": 200 },
-        "color": "red",
+        "color": "transparent",
         "clickReaction": function () {
             let idName = "arcade" + number;
             console.log(idName);
@@ -215,13 +221,13 @@ let skyOnload = function (div) {
 
         div.style.setProperty("--tileNumber", Math.floor(Math.random() * 4));
 
-        console.log("Writing first time SKY data");
+        console.log("Writing first time SKY data | " + idName);
         data = {
             "div": div,
-            "Frames": 3,
+            "Frames": 7,
             "Frame": 0,
             "AnimStart": 0,
-            "AnimEnd": 3,
+            "AnimEnd": 7,
             "AnimLoop": true,
             "frameWidth": 32
         };

@@ -47,7 +47,7 @@ function playFrameForDiv(divDataObject) {
             frameY = data.div.style.getPropertyValue("--tileNumber");
             console.log(frameY + " frameY"); 
         }
-        data.div.style.backgroundPosition = `${-(divFrame * frameWidth)}px ${frameY * 32}px`;
+        data.div.style.backgroundPosition = `${-(divFrame * frameWidth)}px ${frameY * 128}px`;
 
         // Increment the frame index
         divFrame += 1;
