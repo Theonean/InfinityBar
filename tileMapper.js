@@ -80,7 +80,7 @@ function updatemap() {
                     tileArea(midX, wallY, width, 1, tileSize, "wallTile");
 
                     //create roof 
-                    midY = -32 * 5;
+                    midY = -32 * 8;
                     console.log("Drawing roof " + currentDirectionIndex + " at[" + midX + "|" + midY + "]");
                     //create roof side box
                     tileArea(midX, midY, width, 1, tileSize, "roofTile");
@@ -92,7 +92,7 @@ function updatemap() {
                     tileArea(midX, midY, width, 1, tileSize, "roofWallTransition");
 
                     //create sky 
-                    midY = -32 * 12;
+                    midY = -32 * 16;
                     console.log("Drawing sky " + currentDirectionIndex + " at[" + midX + "|" + midY + "]");
                     //create roof side box
                     tileArea(midX, midY, width, 1, tileSize, "sky", skyOnload);

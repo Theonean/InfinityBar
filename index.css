@@ -45,9 +45,9 @@ body {
 
 .roofTile {
     width: 32px;
-    height: 128px;
+    height: 224px;
     position: absolute;
-    background-image: url("sprites/BarElements/tileableRoof.png");
+    background-image: url("sprites/BarElements/roof.png");
     z-index: 1;
     scale: 1;
 }
@@ -66,16 +66,16 @@ body {
     height: 32px;
     position: absolute;
     background-image: url("sprites/BarElements/undergroundDirt.png");
-    z-index: 5;
+    z-index: 1;
     scale: 1;
 }
 
 .floorTile {
     width: 32px;
-    height: 128px;
+    height: 256px;
     position: absolute;
     background-image: url(sprites/BarElements/floor.png);
-    z-index: 1;
+    z-index: 2;
     scale: 1;
 }
 
