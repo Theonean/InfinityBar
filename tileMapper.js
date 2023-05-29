@@ -80,10 +80,10 @@ function updatemap() {
                     tileArea(midX, wallY, width, 1, tileSize, "wallTile");
 
                     //create roof 
-                    midY = -32 * 2;
+                    midY = -32 * 5;
                     console.log("Drawing roof " + currentDirectionIndex + " at[" + midX + "|" + midY + "]");
                     //create roof side box
-                    tileArea(midX, midY, width, 4, tileSize, "roofTile");
+                    tileArea(midX, midY, width, 1, tileSize, "roofTile");
 
                     //create sky 
                     midY = -32 * 6;
