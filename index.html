@@ -10,6 +10,12 @@
     <script src="tileMapper.js"></script>
     <script src="Animations.js"></script>
     <link rel="stylesheet" href=".\index.css">
+    <script src="./pong.js"></script>
+    <script src="./colorPallete.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"
+        integrity="sha512-zhHQR0/H5SEBL3Wn6yYSaTTZej12z0hVZKOv3TwCUXT1z5qeqGcXJLLrbERYRScEDDpYIJhPC1fk31gqR783iQ=="
+        crossorigin="anonymous" defer>
+        </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FidgetRoWe</title>
@@ -17,6 +23,7 @@
 
 <body onload="initialize()">
     <div id="wrapper">
+        <canvas id="pongCanvas" width="600" height="300"></canvas>
         <div id="arcades"></div>
         <div id="bgTiles"></div>
         <div id="Bartender">

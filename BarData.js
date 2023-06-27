@@ -29,20 +29,14 @@ var bardata = [
         "id": "counter"
         //"className": "my-class",
     },
-    {
-        "parent": "wrapper",
-        "prefferedStartDir": 2,
-        "endPos": [200, 270],
-        "id": "barstool1",
-        "className": "barstool",
-    },
+    /*
     {
         "parent": "wrapper",
         "prefferedStartDir": 2,
         "endPos": [140, 100],
         "id": "person0",
         "className": "person",
-    },
+    },*/
     {
         "parent": "wrapper",
         "prefferedStartDir": 2,
@@ -269,6 +263,7 @@ var bardata = [
 
                 if (!spaceData.Playing) {
                     spaceData.Playing = true;
+                    playSoundFile('./sounds/SpaceShipFly.wav');
                 }
             }
         }]
@@ -358,16 +353,19 @@ function createCanClickbox(number) {
                 //first three clicks create indents oncan
                 switch (data.numClicked) {
                     case 0:
+                        playSoundFile('./sounds/canHit.wav');
                         data.AnimStart = 1;
                         data.AnimEnd = 2;
                         data.AnimLoop = false;
                         break;
                     case 1:
+                        playSoundFile('./sounds/canHit.wav');
                         data.AnimStart = 2;
                         data.AnimEnd = 3;
                         data.AnimLoop = false;
                         break;
                     case 2:
+                        playSoundFile('./sounds/canHitFinalSound.wav');
                         data.Frame = 3;
                         data.AnimStart = 26;
                         data.AnimEnd = 31;
@@ -379,7 +377,8 @@ function createCanClickbox(number) {
             }
             //wavingcan be interrupted by another click oncan
             else {
-                if (data.numClicked === 3) {
+                if (data.numClicked === 3 && data.Frame >= 26) {
+                    playSoundFile('./sounds/canHitGoodbye.wav');
                     data.AnimEnd = 50;
                     data.AnimLoop = false;
                     data.numClicked = 0;

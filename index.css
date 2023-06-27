@@ -213,6 +213,15 @@ body {
     background-image: url("sprites/BarElements/BarCounter.png");
 }
 
+#pongCanvas {
+    position: absolute;
+    z-index: 4;
+    transform: scale(0.59,0.26);
+    
+    left: -60px;
+    top: 110px;
+}
+
 .barstool {
     position: absolute;
     width: 64px;
@@ -238,6 +247,14 @@ body {
     background: url("sprites/BarElements/arcade.png");
     background-position: 0px 0px;
     scale: 0.4;
+}
+
+.ball {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    transition: all 1.5s linear;
 }
 
 /*

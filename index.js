@@ -48,6 +48,8 @@ function initialize() {
         movePupil(mouseX, mouseY, eye2, pupil2);
     });
 
+    loadPong();
+
     // Start the animation
     requestAnimationFrame(animate);
 }

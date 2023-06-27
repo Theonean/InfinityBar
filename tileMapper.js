@@ -32,6 +32,7 @@ const Directions = {
 
 let floorY = 32 * 9;
 let wallY = 32 * 6 - 192;
+let canId = 7;
 
 // Set the desired distance between arcades
 const arcadeDistance = 1024;
@@ -84,7 +85,7 @@ function updatemap() {
                     console.log("Drawing roof " + currentDirectionIndex + " at[" + midX + "|" + midY + "]");
                     //create roof side box
                     tileArea(midX, midY, width, 1, tileSize, "roofTile");
-                    
+
                     //create roof - wall transition
                     midY = -32 * 1;
                     console.log("Drawing roofWallTransition " + currentDirectionIndex + " at[" + midX + "|" + midY + "]");
@@ -126,6 +127,43 @@ function updatemap() {
                             //console.log(clickbox);
                             addInteractiveElement(posX, 50, "arcade", clickbox, 0.7);
 
+                            let barstool = {
+                                "parent": "wrapper",
+                                "prefferedStartDir": 2,
+                                "endPos": [posX + 95, 320],
+                                "id": "barstool",
+                                "className": "barstool",
+                                "endScale": 1
+                            }
+                            bardata.push(barstool);
+
+                            //Add cans maybe
+                            let maybeCans = Math.random() > 0.3;
+                            if (maybeCans) {
+                                let canNo = Math.ceil(Math.random() * 3);
+                                for (let index = 0; index < canNo; index++) {
+
+                                    //Add a random amount of cans or either left or right side or not at all of arcade
+                                    let flipflop = Math.random() >= 0.5;
+                                    let canData = {
+                                        "parent": "wrapper",
+                                        "prefferedStartDir": 2,
+                                        "id": "can" + canId,
+                                        "className": "can",
+                                        "clickbox": createCanClickbox(canId++),
+                                        "endScale": 2
+                                    };
+                                    let plusMinusMod = (Math.random() * 20) - 10;
+                                    if (flipflop) {
+                                        canData["endPos"] = [posX + (20 * index) + 200 + Math.random() * 30, 330 + plusMinusMod];
+                                    } else {
+                                        canData["endPos"] = [posX - (20 * index) - 100 + Math.random() * 30, 330 + plusMinusMod];
+
+                                    }
+
+                                    bardata.push(canData);
+                                }
+                            }
                             //Updates maxrendered depending on direction
                             isLeftDirection ? arcadesMaxRendered.renderedLeft += arcadeDistance : arcadesMaxRendered.renderedRight += arcadeDistance;
                         }
@@ -177,24 +215,24 @@ function addInteractiveElement(x, y, className, clickbox = "", scale = 1) {
 }
 
 let skyOnload = function (div) {
-        let idName = div.id;
-        let data;
+    let idName = div.id;
+    let data;
 
-        div.style.setProperty("--tileNumber", Math.floor(Math.random() * 4));
+    div.style.setProperty("--tileNumber", Math.floor(Math.random() * 4));
 
-        console.log("Writing first time SKY data | " + idName);
-        data = {
-            "div": div,
-            "Frames": 7,
-            "Frame": 0,
-            "AnimStart": 0,
-            "AnimEnd": 7,
-            "AnimLoop": true,
-            "frameWidth": 32
-        };
-        divsToAnimate.set(idName, data);
-
-
-        data = divsToAnimate.get(idName);
-        data.Playing = true;
+    console.log("Writing first time SKY data | " + idName);
+    data = {
+        "div": div,
+        "Frames": 7,
+        "Frame": 0,
+        "AnimStart": 0,
+        "AnimEnd": 7,
+        "AnimLoop": true,
+        "frameWidth": 32
     };
+    divsToAnimate.set(idName, data);
+
+
+    data = divsToAnimate.get(idName);
+    data.Playing = true;
+};
