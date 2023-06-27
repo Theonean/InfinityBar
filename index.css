@@ -232,10 +232,11 @@ body {
 
 .arcade {
     position: absolute;
-    width: 247px;
+    width: 246px;
     height: 383px;
     z-index: 4;
-    background-image: url("sprites/BarElements/arcade.png");
+    background: url("sprites/BarElements/arcade.png");
+    background-position: 0px 0px;
     scale: 0.4;
 }
 

@@ -295,12 +295,12 @@ function createArcadeClickbox(number) {
                 console.log("Writing first time data");
                 data = {
                     "div": div,
-                    "Frames": 0,
+                    "Frames": 26,
                     "Frame": 0,
-                    "AnimStart": 0,
-                    "AnimEnd": 0,
-                    "AnimLoop": false,
-                    "frameWidth": 400
+                    "AnimStart": 17,
+                    "AnimEnd": 26,
+                    "AnimLoop": true,
+                    "frameWidth": 246
                 }
                 divsToAnimate.set(idName, data);
             }

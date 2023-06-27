@@ -176,46 +176,6 @@ function addInteractiveElement(x, y, className, clickbox = "", scale = 1) {
     interactiveElementNo++;
 }
 
-//Returns the clickbox object required for creation of a clickbox plus logic for clickin
-function createArcadeClickbox(number) {
-    return [{
-        "pos": { "x": 0, "y": 0 },
-        "size": { "x": 200, "y": 200 },
-        "color": "red",
-        "clickReaction": function () {
-            let idName = "arcade" + number;
-            console.log(idName);
-            let div = document.getElementById(idName);
-            let data;
-
-            //initialize needed variables to animate this div on first click
-            if (!divsToAnimate.has(idName)) {
-                console.log("Writing first time data");
-                data = {
-                    "div": div,
-                    "Frames": 0,
-                    "Frame": 0,
-                    "AnimStart": 0,
-                    "AnimEnd": 0,
-                    "AnimLoop": false,
-                    "frameWidth": 400
-                }
-                divsToAnimate.set(idName, data);
-            }
-
-            //console.log(idName);
-            data = divsToAnimate.get(idName);
-            console.log("Arcade clicked");
-            //only interactable when not playing right now --> may use external interrupts like button on bubbleshooter
-            if (!data.Playing) {
-                data.Playing = true;
-
-                //implement logic for clicking here
-            }
-        }
-    }];
-}
-
 let skyOnload = function (div) {
         let idName = div.id;
         let data;
