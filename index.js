@@ -7,7 +7,7 @@ function initialize() {
     loadMouseStuff();
     //BUBBLES
     startBubbleInterval();
-    setInterval(updatemap, 200);
+    setInterval(updatemap, 50);
     //setInterval(moveBubbles, 40);
 
     // Call the lazyLoadElements function on page load and scroll events

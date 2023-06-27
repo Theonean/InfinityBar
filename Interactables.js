@@ -4,7 +4,7 @@ function loadinteractables() {
     bardata.forEach((barPiece) => {
         if (LoadType === "Chaos") {
             //CHAOS Spawns elements from random directions
-            barElement.create(barPiece, DirectionGod.getRandomDirection(), "slidein_barElement");
+            barElement.create(barPiece, DirectionGod.getRandomDirection(), "spawnInBarElement");
         }
         else if (LoadType === "Satisfying") {
             //SATISFYING makes elements slide into possition gracefully by making them move in only one direction from the preferred direction

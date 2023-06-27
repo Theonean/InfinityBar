@@ -4,6 +4,7 @@ body {
     margin: 0;
     /* allows user to pan on page*/
     user-select: none;
+    background-color: black;
 }
 
 #bubbleshooter {
@@ -39,7 +40,7 @@ body {
     height: 200px;
     position: absolute;
     background: url("sprites/BarElements/SpaceShip.png");
-    z-index: 1;
+    z-index: 3;
     scale: 1;
 }
 
@@ -81,14 +82,14 @@ body {
 
 .sky {
     --tileNumber: 1;
-    --yPos: calc(var(--tileNumber) * -128px);
+    --yPos: calc(var(--tileNumber) * -384px);
     width: 32px;
-    height: 128px;
+    height: 384px;
     position: absolute;
     background: url("sprites/BarElements/sky.png");
     background-position: 0px var(--yPos);
     z-index: 5;
-    transform: scale(1,3);
+    transform: scale(1,1);
 }
 
 
@@ -107,7 +108,7 @@ body {
     --animationName: "slidein_barElement";
     animation-name: var(--animationName);
 
-    animation-duration: 1s;
+    animation-duration: 2s;
     animation-timing-function: linear;
     animation-delay: 0s;
     animation-iteration-count: 1;
