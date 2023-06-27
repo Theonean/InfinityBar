@@ -34,7 +34,7 @@ let floorY = 32 * 9;
 let wallY = 32 * 6 - 192;
 
 // Set the desired distance between arcades
-const arcadeDistance = 1012;
+const arcadeDistance = 1024;
 
 //call updatemap every 0.2 seconds
 function updatemap() {
