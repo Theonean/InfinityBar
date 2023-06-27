@@ -117,6 +117,8 @@ body {
     --slideInStartY: 0;
     --slideInEndX: 0;
     --slideInEndY: 0;
+    --endScale: 1; /* optional parameter to define scale
+    used for arcades to workaround bug*/
 }
 
 @keyframes slidein_barElement {
@@ -141,7 +143,7 @@ body {
     100% {
         top: var(--slideInEndY);
         left: var(--slideInEndX);
-        scale: 1;
+        scale: var(--endScale);
     }
 }
 
@@ -232,9 +234,9 @@ body {
     position: absolute;
     width: 247px;
     height: 383px;
-    z-index: 5;
+    z-index: 4;
     background-image: url("sprites/BarElements/arcade.png");
-    scale: 0.6;
+    scale: 0.4;
 }
 
 /*

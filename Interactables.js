@@ -134,6 +134,7 @@ class barElement {
 
         div.style.setProperty("--slideInEndX", `${barpiece.endPos[0]}px`);
         div.style.setProperty("--slideInEndY", `${barpiece.endPos[1]}px`);
+        div.style.setProperty("--endScale", barpiece.endScale);
         div.style.accentColor = color;
 
         parentDiv.appendChild(div);
@@ -145,7 +146,7 @@ class barElement {
             }
         }
 
-        if(barpiece.onload){
+        if (barpiece.onload) {
             barpiece.onload(div);
             console.log("ONLOAD");
         }

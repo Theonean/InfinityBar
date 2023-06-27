@@ -92,7 +92,7 @@ function updatemap() {
                     tileArea(midX, midY, width, 1, tileSize, "roofWallTransition");
 
                     //create sky 
-                    midY = -32 * 16;
+                    midY = -32 * 20;
                     console.log("Drawing sky " + currentDirectionIndex + " at[" + midX + "|" + midY + "]");
                     //create roof side box
                     tileArea(midX, midY, width, 1, tileSize, "sky", skyOnload);
@@ -124,7 +124,7 @@ function updatemap() {
                             let posX = isLeftDirection ? lastArcadePosition - arcadeDistance * (i + 1) : lastArcadePosition + arcadeDistance * (i + 1);
                             let clickbox = createArcadeClickbox(interactiveElementNo);
                             //console.log(clickbox);
-                            addInteractiveElement(posX, 30, "arcade", clickbox);
+                            addInteractiveElement(posX, 50, "arcade", clickbox, 0.7);
 
                             //Updates maxrendered depending on direction
                             isLeftDirection ? arcadesMaxRendered.renderedLeft += arcadeDistance : arcadesMaxRendered.renderedRight += arcadeDistance;
@@ -156,11 +156,12 @@ function parseIndexToDirection(index) {
 }
 
 let interactiveElementNo = 0;
-function addInteractiveElement(x, y, className, clickbox = "") {
+function addInteractiveElement(x, y, className, clickbox = "", scale = 1) {
     let newData = {
         "parent": "arcades",
         "prefferedStartDir": 2,
         "endPos": [x, y],
+        "endScale": scale,
         "id": className + interactiveElementNo,
         "className": className
     };
@@ -180,7 +181,7 @@ function createArcadeClickbox(number) {
     return [{
         "pos": { "x": 0, "y": 0 },
         "size": { "x": 200, "y": 200 },
-        "color": "transparent",
+        "color": "red",
         "clickReaction": function () {
             let idName = "arcade" + number;
             console.log(idName);
