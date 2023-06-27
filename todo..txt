@@ -70,3 +70,17 @@ add system that spawns hitbox and places it next to object
 -screen with text that loads up pong when you break it
 
 added project to git, see commit history
+
+todo until finished:
+leftside - arcade:
+Add Animation which destroys arcade on click and shows a blinking warning sign
+
+rework bar facade:
+    - countertop
+    -backwall
+    - infinity bar sign
+
+add sounds and interactions:
+    Person: Sounds for each bone, in decreasing tone
+    spaceship flying into portal
+    clicking eyes --> OUCH!
